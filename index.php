@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loja de Camisetas</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <link rel="stylesheet" href="style.css">
 
     <script>
         $(document).ready(function () {
@@ -23,18 +22,18 @@
                     dataType: "html"
 
                 }).done(function (resposta) {
-                    alert(resposta);
+                     $(".enviar").html(resposta);
 
                 }).fail(function (jqXHR, textStatus) {
                     alert("Request failed: " + textStatus);
 
                 }).always(function () {
-                    alert("completou");
+                    alert("Completou!");
                 });
 
             });
-
         });
+    
     </script>
 
 </head>
@@ -77,8 +76,15 @@
 
             <button type="submit">Enviar</button>
 
-        </form>
+        </form >
+        <div class="enviar"></div>
+    
     </div>
+
+
+
+
+
 </body>
 
 </html>
