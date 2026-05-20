@@ -32,7 +32,26 @@
                 });
 
             });
+
+            $(document).on('click', '.excluir', function () {
+              var id = $(this).attr("id");
+                 $.ajax({
+                    url: "apaga.php",
+                    type: "POST",
+                    data: "id="+id,
+                    dataType: "html"
+
+                }).done(function (resposta) {
+                     $(".enviar").html(resposta);
+
+                }).fail(function (jqXHR, textStatus) {
+                     $("div").html("Request failed: " + textStatus);
+
+                }).always(function () {
+                    console.log("Completou!");
+                });
         });
+    });
     
     </script>
 
@@ -77,6 +96,7 @@
             <button type="submit">Enviar</button>
 
         </form >
+        <br>
         <div class="enviar"></div>
     
     </div>
