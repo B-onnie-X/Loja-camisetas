@@ -12,15 +12,16 @@
 
     <script>
         $(document).ready(function () {
-            $("#formCamiseta").submit(function (e) {
-                e.preventDefault();
+            $("#cadastro").on("click", function () {
+                  tamanho = $("#tamanho").val(),
+                  cor = $("#cor").val()
 
                 $.ajax({
                     url: "insere.php",
                     type: "POST",
                     data: {
-                        tamanho: $("#tamanho").val(),
-                        cor: $("#cor").val()
+                        tamanho: tamanho,
+                        cor: cor
                     },
                     dataType: "html"
 
@@ -43,7 +44,7 @@
                  $.ajax({
                     url: "apaga.php",
                     type: "POST",
-                    data: "id="+id,
+                    data: { id: id },
                     dataType: "html"
 
                 }).done(function (resposta) {
@@ -57,6 +58,33 @@
                 });
 
               }
+
+        });
+        
+    
+
+          $(document).on('click', '.editar', function () {
+              var id = $(this).attr("id");
+             
+                 $.ajax({
+                    url: "apaga.php",
+                    type: "POST",
+                    data: { id: id },
+                    dataType: "html"
+
+                }).done(function (resposta) {
+                   $("#tamanho").val(resposta.tamanho);
+                   $("#cor").val(resposta.cor);
+                   $('#modaledit').modal('show');
+
+                }).fail(function (jqXHR, textStatus) {
+                     $(".enviar").html("Request failed: " + textStatus);
+
+                }).always(function () {
+                    console.log("Completou a exclusão!");
+                });
+
+              
 
         });
         
@@ -85,7 +113,6 @@
           <h4 class="modal-title">Pedido de Camiseta</h4>
         </div>
         <div class="modal-body">
-         <form id="formCamiseta" method="post" action="insere.php">
 
          <div class="form-group">
             <label for="tamanho">Tamanho:</label>
@@ -127,10 +154,9 @@
         </div>
         <div class="modal-footer">
           
-          <button type="submit" class="btn btn-default" >Enviar</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="cadastro" >Enviar</button>
           <br>
            
-        </form >
   
         </div>
       </div>
@@ -150,7 +176,6 @@
           <h4 class="modal-title">Alterar pedido de Camiseta</h4>
         </div>
         <div class="modal-body">
-         <form id="formCamiseta" method="post" action="insere.php">
 
          <div class="form-group">
           <label for="tamanho">Tamanho:</label>
@@ -191,10 +216,10 @@
 
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-default" >Enviar</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="editcadastro" >Enviar</button>
           <br>
            
-        </form >
+     
         
         </div>
       </div>
@@ -212,7 +237,7 @@
 
 <div class="enviar">
     <?php
-        include 'consulta2.php';
+        include 'consulta.php';
         inserir();
     ?>
 </div>

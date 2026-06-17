@@ -1,6 +1,6 @@
 <?php
 include 'conecta.php';
-include 'consulta2.php';
+include 'consulta.php';
 
 $id = $_POST['id'];
 

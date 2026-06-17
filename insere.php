@@ -1,6 +1,6 @@
 <?php
 include 'conecta.php';
-include 'consulta2.php';
+include 'consulta.php';
 
 $tamanho_escolhido = $_POST['tamanho'];
 $cor_escolhida = $_POST['cor'];
